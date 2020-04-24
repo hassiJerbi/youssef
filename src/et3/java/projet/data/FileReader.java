@@ -1,4 +1,4 @@
-package et3.java.projet.file;
+package et3.java.projet.data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
