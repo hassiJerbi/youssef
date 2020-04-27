@@ -9,7 +9,7 @@ public class Main
 		if(args.length > 0)
 		{
 			//We start by reading the CSV file
-			FileReader.getDataFromCSVFile("src/et3/java/projet/data/data.csv");
+			FileReader.getDataFromCSVFile(args[0]);
 		}
 		
 		//TODO Project :)
