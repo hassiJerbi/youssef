@@ -21,7 +21,7 @@ public class FileReader
         String ean;
         String title;
         String publisher;
-        Integer date;
+        String date;
         String seriesTitle;
         Integer seriesNumber;
         String authorName;
@@ -39,13 +39,22 @@ public class FileReader
         	//Read the first line
         	line = bufferedReader.readLine();
         	
+        	//Get data from the line
+        	data = line.split(separator, -1);
+        	
+        	if(data.length != 16)
+        	{
+        		System.out.println("[FileReader] The file at " + csvFilePath + " does not contain the right number of columns.");
+        		return;
+        	}
+        	
         	int i = 1;
         	
         	//Read the file line by line
             while ((line = bufferedReader.readLine()) != null)
             {
-                //Get data from the line
-            	data = line.split(separator);
+            	//Get data from the line
+            	data = line.split(separator, -1);
             	
             	//Sort data
             		
@@ -64,11 +73,24 @@ public class FileReader
             		//Get the publication date
             		try
             		{
-            			date = Integer.parseInt(data[4].replaceAll("[^0-9]", ""));
+            			int dateInt = Integer.parseInt(data[4].replaceAll("[^0-9]", ""));
+            			
+            			if(dateInt%10000 >= 2021 || dateInt%10000 < 0)
+            			{
+            				date = "?";
+            			}
+            			else if(dateInt/10000 == 0)
+            			{
+            				date = Integer.toString(dateInt%10000);
+            			}
+            			else
+            			{
+            				date = dateInt%10000 + "-" + dateInt/10000;
+            			}
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
-            			date = null;
+            			date = "?";
             		}
             		
             		//Get the title of the series
@@ -79,7 +101,7 @@ public class FileReader
             		{
             			seriesNumber = Integer.parseInt(data[6]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			seriesNumber = null;
             		}
@@ -98,7 +120,7 @@ public class FileReader
             		{
             			totalCopies = Integer.parseInt(data[10]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			totalCopies = 0;
             		}
@@ -108,7 +130,7 @@ public class FileReader
             		{
             			numberCopyAimeCesaire = Integer.parseInt(data[11]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			numberCopyAimeCesaire = 0;
             		}
@@ -118,7 +140,7 @@ public class FileReader
             		{
             			numberCopyEdmondRostand = Integer.parseInt(data[11]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			numberCopyEdmondRostand = 0;
             		}
@@ -128,7 +150,7 @@ public class FileReader
             		{
             			numberCopyJeanPierreMelville = Integer.parseInt(data[11]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			numberCopyJeanPierreMelville = 0;
             		}
@@ -138,7 +160,7 @@ public class FileReader
             		{
             			numberCopyOscarWilde = Integer.parseInt(data[11]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			numberCopyOscarWilde = 0;
             		}
@@ -148,14 +170,14 @@ public class FileReader
             		{
             			numberCopySaintSimon = Integer.parseInt(data[11]);
             		}
-            		catch (Exception esception)
+            		catch (Exception exception)
             		{
             			numberCopySaintSimon = 0;
             		}
                 
                 //TODO Do something with data
             	
-                System.out.println(
+                /*System.out.println(
                 		isbn + ";" +
                 		ean + ";" +
                 		title + ";" +
@@ -171,7 +193,7 @@ public class FileReader
                 		numberCopyEdmondRostand + ";" +
                 		numberCopyJeanPierreMelville + ";" +
                 		numberCopyOscarWilde + ";" +
-                		numberCopySaintSimon);
+                		numberCopySaintSimon);*/
             }
         } 
         catch (IOException exception) 
