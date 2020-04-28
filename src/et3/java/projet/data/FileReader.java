@@ -177,7 +177,7 @@ public class FileReader
                 
                 //TODO Do something with data
             	
-                /*System.out.println(
+                System.out.println(
                 		isbn + ";" +
                 		ean + ";" +
                 		title + ";" +
@@ -193,7 +193,7 @@ public class FileReader
                 		numberCopyEdmondRostand + ";" +
                 		numberCopyJeanPierreMelville + ";" +
                 		numberCopyOscarWilde + ";" +
-                		numberCopySaintSimon);*/
+                		numberCopySaintSimon);
             }
         } 
         catch (IOException exception) 
